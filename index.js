@@ -18,5 +18,3 @@ myAsyncFunction = async() =>{
 
 myAsyncFunction();
 
-
-///
