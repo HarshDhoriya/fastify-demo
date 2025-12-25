@@ -4,6 +4,7 @@ class Server {
         this.fastify = require('fastify')({
             logger: true
         });
+       
     }
     async configureSwagger(swagger, swaggerConfig) {
         await this.fastify.register(swagger, swaggerConfig);
@@ -37,6 +38,9 @@ class Server {
     }
     setRoutes(routesFunction) {
         routesFunction(this.fastify);
+    }
+    connectDB(dbConfig) {
+        this.fastify.register(require('@fastify/postgres'), dbConfig);
     }
 }
 const serverInstance = new Server();

@@ -31,7 +31,12 @@ const userRoutes = function (fastify) {
 
     // Declare a route
     fastify.get('/', function (req, reply) {
-        reply.send({ hello: 'world' })
+        fastify.pg.query(
+            'SELECT * FROM public.users',
+            function onResult (err, result) {
+                reply.send(err || result)
+            }
+        )
     })
 
     fastify.post('/', function (req, res) {
