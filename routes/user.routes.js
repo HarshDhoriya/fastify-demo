@@ -2,7 +2,28 @@
 const userRoutes = function (fastify) {
 
 
-    fastify.post('/login', async (request, reply) => {
+    fastify.post('/login', {
+        schema: {
+            description: 'User Login',
+            tags: ['user'],
+            summary: 'Use this API for user login',
+            
+            body: {
+                type: 'object',
+                properties: {
+                    username: {
+                        type: 'string',
+                        description: 'provide username'
+                    },
+                    password: {
+                        type: 'string',
+                        description: 'provide password'
+                    }
+                    }
+                }
+            }
+        },
+    async (request, reply) => {
         const { username, password } = request.body;
         // Add your login logic here
         reply.send({ message: `User ${username} logged in successfully.` });
